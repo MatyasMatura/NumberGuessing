@@ -9,7 +9,7 @@ namespace NumberGuessing.Service
 {
     public class NumerousSecretatorLogic
     {
-        private readonly Random random;
+        private readonly Random random = new Random();
 
         public NumerousSecretatorLogic(Random random)
         {
@@ -21,7 +21,8 @@ namespace NumberGuessing.Service
 
         public bool Guess(int number)
         {
-            userData.NumberToGuess = random.Next(userData.StartNumber, userData.EndNumber);
+            userData.UserChoice = number;
+            userData.LastGuessState = GameState.None;
             while (userData.Guessed != true)
             {
                 userData.TipCounter++;

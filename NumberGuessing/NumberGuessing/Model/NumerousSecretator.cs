@@ -12,6 +12,7 @@ namespace NumberGuessing.Model
         public int NumberToGuess { get; set; }
         public int TipCounter { get; set; }
         public bool Guessed { get; set; }
+        public int UserChoice { get; set; }
         public GameState LastGuessState { get; set; }
     }
 }

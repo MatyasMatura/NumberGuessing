@@ -4,13 +4,51 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <div class="text-center">
     <h1 class="display-4">Hádání náhodného čísla</h1>
 
-    <form method="post">
-        <input type="number" placeholder="Délka strany A" required min="0" />
-
-        <input type="submit" value="Hádej!" />
+    <form method="post" class="justify-content-center">
+        <input type="hidden" asp-for="GameData.TipCounter" value="@Model.GameData.TipCounter" />
+        <div class="row">
+            <div class="form-group col-md">
+                <input type="number" class="form-control" placeholder="Nejmenší číslo k uhádnutí" asp-for="GameData.StartNumber" value="" />
+            </div>
+            <div class="form-group col-md">
+                <input type="number" class="form-control" placeholder="Největší číslo k uhádnutí" asp-for="GameData.EndNumber" value="" />
+            </div>
+            <div class="form-group col-md">
+                <input type="number" class="form-control" placeholder="Tvůj odhad" asp-for="UserChoice" value="3" />
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Hádej!</button>
     </form>
+    @if (Model.GameData.LastGuessState != GameState.None)
+    {
+        //@while (Model.GameData.UserChoice != Model.GameData.NumberToGuess)
+        //{
+            if (Model.GameData.LastGuessState == GameState.IsGreater)
+            {
+                <p>Zadej menší číslo</p>
+            }
+            if (Model.GameData.LastGuessState == GameState.IsLess)
+            {
+                <p>Zadej větší číslo</p>
+            }
+            if (Model.GameData.LastGuessState == GameState.IsEqual)
+            {
+                <p>Paráda</p>
+                <p>Číslo @Model.GameData.NumberToGuess bylo uhádnuto.</p>
+                <p>Trvalo to @Model.GameData.TipCounter pokusů.</p>
+                {
+                    Model.GameData.TipCounter = 0;
+                }
+            }
+            //break;
+        //}
+        <p>Číslo @Model.GameData.NumberToGuess bylo uhádnuto.</p>
+        <p>Trvalo to @Model.GameData.TipCounter pokusů.</p>
+    }
+
 </div>

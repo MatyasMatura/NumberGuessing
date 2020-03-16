@@ -9,6 +9,8 @@ namespace NumberGuessing.Model
 {
     public enum GameState
     {
+        [Display(Name = "Bez volby")]
+        None = 2,
         [Display(Name = "Je menší")]
         IsLess = -1,
         [Display(Name = "Je stejné")]
