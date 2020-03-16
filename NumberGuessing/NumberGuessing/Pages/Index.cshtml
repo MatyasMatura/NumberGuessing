@@ -9,25 +9,24 @@
 <div class="text-center">
     <h1 class="display-4">Hádání náhodného čísla</h1>
 
-    <form method="post" class="justify-content-center">
+    <form method="post">
         <input type="hidden" asp-for="GameData.TipCounter" value="@Model.GameData.TipCounter" />
+        <input type="hidden" asp-for="GameData.NumberToGuess" value="@Model.GameData.NumberToGuess" />
         <div class="row">
             <div class="form-group col-md">
-                <input type="number" class="form-control" placeholder="Nejmenší číslo k uhádnutí" asp-for="GameData.StartNumber" value="" />
+                <input type="number" class="form-control" placeholder="Nejmenší číslo k uhádnutí" asp-for="GameData.StartNumber" value="@Model.GameData.StartNumber" />
             </div>
             <div class="form-group col-md">
-                <input type="number" class="form-control" placeholder="Největší číslo k uhádnutí" asp-for="GameData.EndNumber" value="" />
+                <input type="number" class="form-control" placeholder="Největší číslo k uhádnutí" asp-for="GameData.EndNumber" value="@Model.GameData.EndNumber" />
             </div>
             <div class="form-group col-md">
-                <input type="number" class="form-control" placeholder="Tvůj odhad" asp-for="UserChoice" value="3" />
+                <input type="number" class="form-control" placeholder="Tvůj odhad" asp-for="UserChoice" value="" />
             </div>
         </div>
         <button class="btn btn-primary" type="submit">Hádej!</button>
     </form>
     @if (Model.GameData.LastGuessState != GameState.None)
     {
-        //@while (Model.GameData.UserChoice != Model.GameData.NumberToGuess)
-        //{
             if (Model.GameData.LastGuessState == GameState.IsGreater)
             {
                 <p>Zadej menší číslo</p>
@@ -41,12 +40,8 @@
                 <p>Paráda</p>
                 <p>Číslo @Model.GameData.NumberToGuess bylo uhádnuto.</p>
                 <p>Trvalo to @Model.GameData.TipCounter pokusů.</p>
-                {
-                    Model.GameData.TipCounter = 0;
-                }
+                { Model.GameData.TipCounter = 0; }
             }
-            //break;
-        //}
         <p>Číslo @Model.GameData.NumberToGuess bylo uhádnuto.</p>
         <p>Trvalo to @Model.GameData.TipCounter pokusů.</p>
     }

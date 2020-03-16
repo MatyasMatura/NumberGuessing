@@ -21,9 +21,13 @@ namespace NumberGuessing.Service
 
         public bool Guess(int number)
         {
+            if (userData.TipCounter == 0)
+            {
+                userData.NumberToGuess = random.Next(userData.StartNumber, userData.EndNumber);
+            }
             userData.UserChoice = number;
             userData.LastGuessState = GameState.None;
-            while (userData.Guessed != true)
+            if (userData.Guessed != true)
             {
                 userData.TipCounter++;
                 if (number > userData.NumberToGuess)
@@ -43,7 +47,11 @@ namespace NumberGuessing.Service
                 }
                 return false;
             }
-            return true;
+            else
+            {
+                userData.TipCounter = 0;
+                return true;
+            }
         }
     }
 }
