@@ -30,6 +30,7 @@ namespace NumberGuessing.Pages
         // zahájení hry - začíná první kolo
         public void OnGet()
         {
+            _nmsLogic.userData.LastGuessState = GameState.None;
             Message = "Začíná hra...pravidla už znáš";
             GameData = _nmsLogic.userData;
         }
